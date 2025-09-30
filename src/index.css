@@ -1,0 +1,51 @@
+.app_container{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1{
+  color: black;
+  border: 2px, solid, black;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.search-bar{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  p{
+    font-size: 20px;
+  }
+}
+
+
+input{
+  border: 2px, solid, black;
+  font-size: 20px;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.box-articoli{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  list-style: none;
+  gap: 20px;
+  border: 2px, solid, black;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.articolo{
+  max-width: 30%;
+  border: 2px, solid, black;
+  padding: 10px;
+  border-radius: 12px;
+  
+}
