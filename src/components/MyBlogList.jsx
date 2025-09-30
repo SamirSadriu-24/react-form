@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const blogPosts = [
     {
         id: 1,
@@ -27,24 +29,59 @@ const blogPosts = [
 ];
 
 
+
 const MyBlogList = () => {
+
+    const [articolo, impostaArticolo] = useState(blogPosts)
+    const [titoloNuovo, impostaNuovoArticolo] = useState("")
+
+    const aggiungiArticolo = e => {
+        e.preventDefault();
+        const titolo = titoloNuovo.trim();
+        if (!titolo) return;
+
+        const nuovo = {
+            id: articolo.length + 1,
+            title: titolo,
+            description: ""
+        };
+
+        const articoliAggiornati = ([...articolo, nuovo]);
+        impostaArticolo(articoliAggiornati);
+        impostaNuovoArticolo("");
+    }
+
+        const rimuoviArticolo = i => {
+        const articoliAggiornati = articolo.filter((articolo, articoloIndex) => {
+            return articoloIndex !== i
+        })
+        .map((articolo, index) => ({ ...articolo, id: index + 1 }));
+        impostaArticolo(articoliAggiornati);
+    }
+
     return (
         <>
-            <form>
+            <form onSubmit={aggiungiArticolo}>
                 <input
                     type="text"
-                    placeholder='Cerca un post'
+                    placeholder='aggiungi un articolo'
+                    value={titoloNuovo}
+                    onChange={(e) => { impostaNuovoArticolo(e.target.value) }}
                 />
+                <button className="Invio" type='submit'>Inserisci l'articolo nuovo</button>
             </form>
 
             <ul className="box-articoli">
-                {blogPosts.map((blog, index) => (
+                {articolo.map((blog, index) => (
                     <li className="articolo"
-                        key={index}>
-                        {blog.title}
+                        key={blog.id}>
+                        {blog.id + ")"}{" "}{blog.title}
+                        <button className="Remove" onClick={() => rimuoviArticolo(index)}>
+                            Elimina
+                        </button>
                     </li>
                 ))}
-            </ul>
+            </ul >
 
         </>
     )
